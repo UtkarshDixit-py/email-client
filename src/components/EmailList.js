@@ -5,11 +5,8 @@ import { useSelector } from "react-redux";
 
 
 const EmailList = () => {
-    let arr = [1,2,3,4,5,6,7,1,1,1,1,1]
     const data = useSelector((state)=>state.userReducer.List);
     const emailList = data.list;
-
-    console.log(emailList)
   return (
     <Container>
         {emailList ? 
@@ -24,7 +21,6 @@ const EmailList = () => {
 }
 
 const Container = styled.div`
-  border: 2px solid red;
   grid-column: 1 / 2;
   overflow: scroll;
   

@@ -4,3 +4,10 @@ export const setEmails = (emailList)=>{
         payload: emailList
     }
 }
+
+export const displayBody = (bodyData)=>{
+    return{
+        type : "DISPLAY_BODY",
+        payload : bodyData
+    }
+}

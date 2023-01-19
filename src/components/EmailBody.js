@@ -1,7 +1,21 @@
 import React from "react";
 import styled from "styled-components";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import parse from "html-react-parser";
 
 const EmailBody = () => {
+  const [body, setBody] = useState("");
+  const id = useSelector((state) => state.userReducer.itemId);
+
+  useEffect(() => {
+    fetch(`https://flipkart-email-mock.vercel.app/?id=${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setBody(data.body);
+      });
+  }, [id]);
+
   return (
     <Container>
       <Body>
@@ -17,40 +31,7 @@ const EmailBody = () => {
             <button>Mark as Favourite</button>
           </Right>
         </Header>
-        <BodyText>
-          <p>
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout. The point
-            of using Lorem Ipsum is that it has a more-or-less normal
-            distribution of letters, as opposed to using 'Content here, content
-            here', making it look like readable English. Many desktop publishing
-            packages and web page editors now use Lorem Ipsum as their default
-            model text, and a search for 'lorem ipsum' will uncover many web
-            sites still in their infancy. Various versions have evolved over the
-            years, sometimes by accident, sometimes on purpose (injected humour
-            and the like).
-            <br />
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source. Lorem Ipsum comes from sections
-            1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes
-            of Good and Evil) by Cicero, written in 45 BC. This book is a
-            treatise on the theory of ethics, very popular during the
-            Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit
-            amet..", comes from a line in section 1.10.32.
-            <br />
-            <br />
-            The standard chunk of Lorem Ipsum used since the 1500s is reproduced
-            below for those interested. Sections 1.10.32 and 1.10.33 from "de
-            Finibus Bonorum et Malorum" by Cicero are also reproduced in their
-            exact original form, accompanied by English versions from the 1914
-            translation by H. Rackham.
-          </p>
-        </BodyText>
+        <BodyText>{parse(body)}</BodyText>
       </Body>
     </Container>
   );
@@ -64,9 +45,15 @@ const Container = styled.div`
 const Body = styled.div`
   border: 1px solid #cfd2dc;
   border-radius: 20px;
-  height: 100%;
+  height: 87vh;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
 `;
 const Picture = styled.div`
   height: 50px;

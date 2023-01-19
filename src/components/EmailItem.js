@@ -1,7 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { displayBody } from "../redux/actions/actions";
+import { useDispatch} from "react-redux";
 
-const EmailItem = ({ date, from, short_description, subject }) => {
+const EmailItem = ({ date, from, short_description, subject ,id }) => {
+
+  const dispatch = useDispatch()
+
   const timestamp = date;
   const myDate = new Date(timestamp);
   const dateString = myDate.toLocaleDateString("en-US", {
@@ -14,8 +19,13 @@ const EmailItem = ({ date, from, short_description, subject }) => {
     minute: "2-digit",
   });
 
+  const handleClick=()=>{
+    dispatch(displayBody(id));
+    
+  }
+
   return (
-    <Container>
+    <Container onClick={handleClick}>
       <Left>
         <Picture>F</Picture>
       </Left>
@@ -24,11 +34,11 @@ const EmailItem = ({ date, from, short_description, subject }) => {
           From : <b>{from.email}</b>
         </div>
         <div>
-          Subject : <b>Lorem ipsum</b>
+          Subject : <b>{subject}</b>
         </div>
         <div>{short_description}</div>
         <div>
-        {dateString} {timeString}
+          {dateString} {timeString}
           <Tag>Favourite</Tag>
         </div>
       </Right>
@@ -45,6 +55,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   padding: 15px;
+
+  &:hover{
+      border: 1px solid #e54065;
+    }
 `;
 
 const Picture = styled.div`

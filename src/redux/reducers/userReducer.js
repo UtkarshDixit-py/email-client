@@ -1,6 +1,9 @@
+
 const initialState = {
     List:[],
-    filteredList:[]
+    filteredList:[],
+    displayBody: false,
+    itemId : 0
 }
 
 export const userReducer = (state = initialState,action)=>{
@@ -9,6 +12,12 @@ export const userReducer = (state = initialState,action)=>{
             return{
                 ...state,
                 List : action.payload
+            }
+        case "DISPLAY_BODY":
+            return{
+                ...state,
+                displayBody : true,
+                itemId : action.payload
             }
         default:
             return state            
