@@ -1,9 +1,12 @@
+import { showFav } from "../actions/actions"
 
 const initialState = {
     List:[],
     filteredList:[],
     displayBody: false,
-    itemId : 0
+    itemId : 0,
+    showFav : false
+
 }
 
 export const userReducer = (state = initialState,action)=>{
@@ -18,6 +21,18 @@ export const userReducer = (state = initialState,action)=>{
                 ...state,
                 displayBody : true,
                 itemId : action.payload
+            }
+        case "ADD_TO_FAV":
+            return{
+                ...state,
+                filteredList : [...state.filteredList,action.payload]
+            }
+
+        case "SHOW_FAV" :
+            console.log(state.showFav)
+            return{
+                ...state,
+                showFav : !state.showFav
             }
         default:
             return state            

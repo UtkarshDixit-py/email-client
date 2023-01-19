@@ -1,14 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector ,useDispatch } from "react-redux";
+import { addToFav , removeFromFav  } from "../redux/actions/actions";
 import parse from "html-react-parser";
 
 const EmailBody = () => {
   const [body, setBody] = useState("");
+  const [fav, setfav] = useState(false);
   const id = useSelector((state) => state.userReducer.itemId);
+  const dispatch = useDispatch()
+
 
   useEffect(() => {
+
     fetch(`https://flipkart-email-mock.vercel.app/?id=${id}`)
       .then((res) => res.json())
       .then((data) => {
@@ -16,6 +21,15 @@ const EmailBody = () => {
       });
   }, [id]);
 
+
+
+  // const changeFavButton = () => setfav(!fav);
+
+
+  function handleAddToFav() {
+    // changeFavButton();
+    dispatch(addToFav(id));
+  }
   return (
     <Container>
       <Body>
@@ -28,7 +42,14 @@ const EmailBody = () => {
             </Title>
           </Left>
           <Right>
-            <button>Mark as Favourite</button>
+            {
+              fav ? (
+                <button>Added To Favourite</button>
+              ) : (
+                  <button onClick={handleAddToFav}>Mark as Favourite</button>
+              )
+            }
+            
           </Right>
         </Header>
         <BodyText>{parse(body)}</BodyText>

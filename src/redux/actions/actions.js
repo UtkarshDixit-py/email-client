@@ -11,3 +11,23 @@ export const displayBody = (bodyData)=>{
         payload : bodyData
     }
 }
+
+export const addToFav = (id)=>{
+    return{
+        type : "ADD_TO_FAV",
+        payload : id
+    }
+}
+
+export const removeFromFav = (id)=>{
+    return{
+        type : "REMOVE_FROM_FAV",
+        payload : id
+    }
+}
+
+export const showFav = () =>{
+    return{
+        type:"SHOW_FAV"
+    }
+}
