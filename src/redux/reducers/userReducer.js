@@ -1,4 +1,3 @@
-
 const initialState = {
   List: [],
   filteredList: [],

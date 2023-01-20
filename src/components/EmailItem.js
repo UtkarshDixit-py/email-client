@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { displayBody } from "../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,14 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 const EmailItem = (obj) => {
   const { date, from, short_description, subject, id } = obj;
 
-  const [isFav , setIsFav ] = useState(false);
-  const favIds = useSelector((state)=>state.userReducer.filteredList);
-
-  useEffect(()=>{
-    if(favIds.includes(id)) setIsFav(true)
-  },[favIds])
-
   const dispatch = useDispatch();
+  const [isFav, setIsFav] = useState(false);
+  const favIds = useSelector((state) => state.userReducer.filteredList);
+
+  useEffect(() => {
+    if (favIds.includes(id)) setIsFav(true);
+  }, [favIds]);
 
   const timestamp = date;
   const myDate = new Date(timestamp);
@@ -46,9 +45,7 @@ const EmailItem = (obj) => {
         <div>{short_description}</div>
         <div>
           {dateString} {timeString}
-           {
-            isFav ? <Tag>Favourite</Tag> : <></>
-          } 
+          {isFav ? <Tag>Favourite</Tag> : <></>}
         </div>
       </Right>
     </Container>

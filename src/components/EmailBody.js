@@ -7,12 +7,10 @@ import parse from "html-react-parser";
 
 const EmailBody = () => {
   const [body, setBody] = useState("");
+  const dispatch = useDispatch();
   const id = useSelector((state) => state.userReducer.itemId);
   const favIds = useSelector((state) => state.userReducer.filteredList);
   const fav = useSelector((state) => state.userReducer.isFav);
-
-  console.log(favIds);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch(`https://flipkart-email-mock.vercel.app/?id=${id}`)

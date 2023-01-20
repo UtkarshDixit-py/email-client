@@ -1,18 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { showFav , showOthers } from "../redux/actions/actions";
+import { showFav, showOthers } from "../redux/actions/actions";
 
 const Navigation = () => {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-
-    const handleFavClick =()=>{
-        dispatch(showFav())
-    }
-    const handleClick =()=>{
-      dispatch(showOthers())
-    }
+  const handleFavClick = () => {
+    dispatch(showFav());
+  };
+  const handleClick = () => {
+    dispatch(showOthers());
+  };
   return (
     <Container>
       <p>Filter by:</p>
@@ -40,7 +39,7 @@ const Container = styled.div`
     margin: 10px;
     padding: 5px;
 
-    &:hover{
+    &:hover {
       background-color: #e1e4ea;
     }
   }
