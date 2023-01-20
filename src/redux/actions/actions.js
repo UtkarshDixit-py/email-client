@@ -31,3 +31,15 @@ export const showFav = () =>{
         type:"SHOW_FAV"
     }
 }
+
+export const showOthers = () =>{
+    return{
+        type:"SHOW_OTHERS"
+    }
+}
+
+export const setFavFalse = ()=>{
+    return{
+        type : "SET_FAV_FALSE"
+    }
+}

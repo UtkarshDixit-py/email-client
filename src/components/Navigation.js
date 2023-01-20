@@ -1,21 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { showFav } from "../redux/actions/actions";
+import { useDispatch } from "react-redux";
+import { showFav , showOthers } from "../redux/actions/actions";
 
 const Navigation = () => {
-    const favs = useSelector((state)=>state.userReducer.filteredList);
     const dispatch = useDispatch()
 
 
     const handleFavClick =()=>{
         dispatch(showFav())
     }
+    const handleClick =()=>{
+      dispatch(showOthers())
+    }
   return (
     <Container>
       <p>Filter by:</p>
-      <button>Unead</button>
-      <button>Read</button>
+      <button onClick={handleClick}>Unead</button>
+      <button onClick={handleClick}>Read</button>
       <button onClick={handleFavClick}>Favourites</button>
     </Container>
   );
