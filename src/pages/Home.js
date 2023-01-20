@@ -34,8 +34,7 @@ const Home = () => {
 }
 
 const Container = styled.div`
-  border: 2px solid green;
-  height: 92vh;
+  height: 93vh;
   padding: 25px;
   display: grid;
   grid-template-columns: 1fr;
